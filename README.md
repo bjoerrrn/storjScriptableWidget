@@ -26,4 +26,4 @@ Tested with storj node version `1.52.2`
 
 ## license
 
-[GPL-3.0](https://github.com/dusselmann/storjScriptableWidget/blob/main/LICENSE)
+[Apache-2.0](https://github.com/dusselmann/storjScriptableWidget/blob/main/LICENSE)
