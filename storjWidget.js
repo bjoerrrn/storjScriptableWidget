@@ -6,16 +6,13 @@ let padding = 22;
 widget.setPadding(padding, padding, padding, padding);
 
 // Adjust these URLs. "url" is the enpoint of your storjWidget-exporter and widget.url will be opened when you click on the widget on your homescreen.
-widget.url = "http://my-grafana-dashboard.com";
+// widget.url = "http://my-grafana-dashboard.com";
 let url = "http://my-storjWidget-exporter.com:3123/bandwidth";
 
 let apiResponse = await loadData();
 console.log(apiResponse);
 
-let header = widget.addText("STORJ NODES OVERVIEW (" + getDate() + ")".toUpperCase());
-header.font = Font.mediumSystemFont(16);
-
-widget.addSpacer();
+let fontsize = 12;
 
 let vStack = widget.addStack();
 vStack.layoutHorizontally();
@@ -23,17 +20,25 @@ vStack.layoutHorizontally();
 //Bandwidth today
 let viewStackBandwidth = vStack.addStack();
 viewStackBandwidth.layoutVertically();
-let labelIn = viewStackBandwidth.addText("INGRESS"); 
-labelIn.font = Font.mediumSystemFont(13);
+let labelIn = viewStackBandwidth.addText("IN"); 
+labelIn.font = Font.mediumSystemFont(fontsize);
 let valueIn = viewStackBandwidth.addText(apiResponse.ingress);
-valueIn.font = Font.mediumSystemFont(18);
+valueIn.font = Font.mediumSystemFont(fontsize);
 valueIn.textColor = Color.green();
 viewStackBandwidth.addSpacer();
-let labelOut = viewStackBandwidth.addText("EGRESS"); 
-labelOut.font = Font.mediumSystemFont(13);
+let labelOut = viewStackBandwidth.addText("OUT"); 
+labelOut.font = Font.mediumSystemFont(fontsize);
 let valueOut = viewStackBandwidth.addText(apiResponse.egress);
-valueOut.font = Font.mediumSystemFont(18);
+valueOut.font = Font.mediumSystemFont(fontsize);
 valueOut.textColor = Color.green();
+viewStackBandwidth.addSpacer();
+let calc = (100 / apiResponse.spaceAvailable) * apiResponse.spaceUsed
+let calcFormatted = calc.toFixed(2) + " %"
+let labelSpaceUsed = viewStackBandwidth.addText("SPACE"); 
+labelSpaceUsed.font = Font.mediumSystemFont(fontsize);
+let valueSpaceUsed = viewStackBandwidth.addText(calcFormatted);
+valueSpaceUsed.font = Font.mediumSystemFont(fontsize);
+valueSpaceUsed.textColor = Color.green();
 
 vStack.addSpacer();
 
@@ -41,33 +46,26 @@ vStack.addSpacer();
 let viewStackPayout = vStack.addStack();
 viewStackPayout.layoutVertically();
 let labelPayoutToday = viewStackPayout.addText("TODAY"); 
-labelPayoutToday.font = Font.mediumSystemFont(13);
-let valuePayoutToday = viewStackPayout.addText(apiResponse.estimatedPayoutToday + " $");
-valuePayoutToday.font = Font.mediumSystemFont(18);
+labelPayoutToday.font = Font.mediumSystemFont(fontsize);
+let valuePayoutToday = viewStackPayout.addText(apiResponse.estimatedPayoutToday.toFixed(2) + " $");
+valuePayoutToday.font = Font.mediumSystemFont(fontsize);
 valuePayoutToday.textColor = Color.green();
 viewStackPayout.addSpacer();
 let labelPayoutMonth = viewStackPayout.addText("MONTH"); 
-labelPayoutMonth.font = Font.mediumSystemFont(13);
-let valuePayoutMonth = viewStackPayout.addText(apiResponse.estimatedPayoutTotal + " $");
-valuePayoutMonth.font = Font.mediumSystemFont(18);
+labelPayoutMonth.font = Font.mediumSystemFont(fontsize);
+let valuePayoutMonth = viewStackPayout.addText(apiResponse.estimatedPayoutTotal.toFixed(2) + " $");
+valuePayoutMonth.font = Font.mediumSystemFont(fontsize);
 valuePayoutMonth.textColor = Color.green();
+viewStackPayout.addSpacer();
 
-vStack.addSpacer();
 
-//Payout
-let viewStackSpaceAndUp = vStack.addStack();
-viewStackSpaceAndUp.layoutVertically();
-let labelSpaceUsed = viewStackSpaceAndUp.addText("SPACE USED"); 
-labelSpaceUsed.font = Font.mediumSystemFont(13);
-let valueSpaceUsed = viewStackSpaceAndUp.addText(apiResponse.spaceUsed + "/" + apiResponse.spaceAvailable + " TB");
-valueSpaceUsed.font = Font.mediumSystemFont(18);
-valueSpaceUsed.textColor = Color.green();
-viewStackSpaceAndUp.addSpacer();
-let labelNodesOnline = viewStackSpaceAndUp.addText("NODES ONLINE"); 
-labelNodesOnline.font = Font.mediumSystemFont(13);
-let valueNodesOnline = viewStackSpaceAndUp.addText(apiResponse.nodesOnline + "/" + apiResponse.totalNodesCount );
-valueNodesOnline.font = Font.mediumSystemFont(18);
-valueNodesOnline.textColor = Color.green();
+let labelTimestamp = viewStackPayout.addText("TIME"); 
+labelTimestamp.font = Font.mediumSystemFont(fontsize);
+let valueTimestamp = viewStackPayout.addText(getDate());
+valueTimestamp.font = Font.mediumSystemFont(fontsize);
+valueTimestamp.textColor = Color.green();
+
+
 
 Script.setWidget(widget);
 Script.complete();
