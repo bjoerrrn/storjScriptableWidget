@@ -4,7 +4,7 @@
 
 <img src="https://github.com/dusselmann/storjScriptableWidget/blob/main/screenshot.jpeg?raw=true" alt="" width=340 align="right"/> 
 
-This is a fork of [StorjWidget by striker43](https://github.com/striker43/storjWidget) with minor optical modifications. 
+This is a fork of [StorjWidget](https://github.com/striker43/storjWidget) with minor optical modifications. 
 
 StorjScriptableWidget is a <a href="https://scriptable.app">Scriptable</a> Widget that show aggregated stats of your [storage node(s)](https://www.storj.io/node). It shows the `daily ingress` as `in`, `daily egress` as `out`, `today's earnings` as `today`, `this month's earnings` as `month`, `space used` and the timestamp of the data shown as `time` . 
 
