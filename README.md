@@ -10,11 +10,11 @@ StorjScriptableWidget is a <a href="https://scriptable.app">Scriptable</a> Widge
 
 The widget pulls data from the [storjWidget-Exporter](https://github.com/striker43/storjWidget-exporter) every 4-7 minutes. This is triggered by iOS and can not be changed. 
 
-Tested with storj node version `1.52.2`
+Tested with storj node version `1.67.3`.
 
 ## usage
 
-1. Setup and run [storjWidget-Exporter](https://github.com/striker43/storjWidget-exporter).
+1. Setup and run [storjScriptableWidgetExporter](https://github.com/bjoerrrn/storjScriptableWidgetExporter).
 2. Install <a href="https://scriptable.app">Scriptable</a> on your iPhone from the App Store.
 3. Download storjWidget.js from this repository.
 4. Import storjWidget.js in Scriptable.
